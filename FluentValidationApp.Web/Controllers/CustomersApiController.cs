@@ -46,14 +46,13 @@ namespace FluentValidationApp.Web.Controllers
         }
 
         // PUT: api/CustomersApi/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCustomer(int id, Customer customer)
         {
-            var result = _customerValidator.Validate(customer);
+            var result = _customerValidator.Validate(customer); // Update etmek istediğim customer ın verilerini valide ettim.
 
-            if (!result.IsValid)
-                return BadRequest(result.Errors.Select(x => new
+            if (!result.IsValid) // Validation da hata varsa if bloğuna girer kod akışı
+                return BadRequest(result.Errors.Select(x => new // Hataları yazdığım custom mesaj ile client a döndüm .
                 {
                     property = x.PropertyName,
                     error = x.ErrorMessage
@@ -87,14 +86,13 @@ namespace FluentValidationApp.Web.Controllers
         }
 
         // POST: api/CustomersApi
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
         {
-            var result = _customerValidator.Validate(customer);
+            var result = _customerValidator.Validate(customer); // Creeta etcemiz customer ı valide ettim.
 
-            if (!result.IsValid)
-                return BadRequest(result.Errors.Select(x=> new
+            if (!result.IsValid) // validation sonucunda hata varsa if bloguna girer kod akışı.
+                return BadRequest(result.Errors.Select(x=> new   // Hataları yazdığım custom message ile client a döndüm.
                 {
                     property = x.PropertyName ,
                     error = x.ErrorMessage
